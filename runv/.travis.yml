@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+
+language: go
+
+matrix:
+  include:
+    - go: 1.4
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y autoconf automake pkg-config libdevmapper-dev libvirt-dev -qq
+
+script: 
+  - cd ${TRAVIS_BUILD_DIR}
+  - ./verify-gofmt.sh
+  - ./autogen.sh
+  - ./configure 
+  - make
+
